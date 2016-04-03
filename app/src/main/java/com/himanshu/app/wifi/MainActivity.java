@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //
 
 
         txv[0]=(TextView) findViewById(R.id.tv1);
@@ -47,7 +48,9 @@ public class MainActivity extends AppCompatActivity  {
        // txv5=(TextView) findViewById(R.id.tv5);
         //thead.setText("List Of WiFi Available !");
 
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,7 +76,7 @@ public class MainActivity extends AppCompatActivity  {
                     DecimalFormat df = new DecimalFormat("###.##");
 
                     txv[0].append ( "BSSID: " + scanresult.BSSID + "\n");
-                    txv[0].append("RSSI: " + scanresult.level + "\n" + "Frequency: " + scanresult.frequency + "\n"+ "Capability: " + scanresult.capabilities + "\n" + scanresult.SSID + "\n" + scanresult.timestamp / 60000000 +  "\n"+"Approx Distance Of Access Point: "+df.format(dis)+" meters." +"\n\n");
+                    txv[0].append("RSSI: " + scanresult.level + "\n" + "Frequency: " + scanresult.frequency + "\n"+ "Capability: " + scanresult.capabilities + "\n" + scanresult.SSID + "\n" + scanresult.timestamp / 60000000 +  "\n"+"Approx Distance Of Access Point: "+df.format(dis)+" m." +"\n\n");
 
 
 
