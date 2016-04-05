@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.build();
                 myNotication = builder.getNotification();
                 myNotication.flags = Notification.FLAG_AUTO_CANCEL;
-                manager.notify(11, myNotication);
+                manager.notify(11, myNotication);//
             }
 
 
