@@ -32,6 +32,8 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    String st;
+    int flag=0;
     NotificationManager manager;
     Notification myNotication;
     private static final int NOTIFY_ME_ID=1337;
@@ -91,28 +93,57 @@ public class MainActivity extends AppCompatActivity {
             txv[0].setMovementMethod(new ScrollingMovementMethod());
             double dis = (Math.pow(10.0, exp) * 100.0) / 100.0;
             DecimalFormat df = new DecimalFormat("###.##");
-            String id=scanresult.BSSID.toString();
-           if(id=="30:b5:c2:cf:7f:b0")
-            {
+            String id=scanresult.SSID.toString();
+
                 manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
                 Notification.Builder builder = new Notification.Builder(MainActivity.this);
                 builder.setAutoCancel(false);
                 builder.setTicker("this is ticker text");
-                builder.setContentTitle("WhatsApp Notification");
-                builder.setContentText("You have a new message");
+
+            if(flag==0)
+            {
+
+            if(new String("NirmankartaWiFi").equals(id)) {
+                builder.setContentTitle("Welcome Home");
+                flag=1;
+            }
+
+                if (new String("proxy01").equals(id)) {
+                    builder.setContentTitle("Welcome To NSIT");
+                    flag=1;
+                }
+                if (new String("kunjbihari").equals(id)) {
+                    builder.setContentTitle("Welcome To Sangam Vihar");
+                    flag=1;
+                }
+                if (new String("kunjbihari").equals(id)) {
+                    builder.setContentTitle("Welcome To Sangam Vihar");
+                    flag=1;
+                }
+                if (new String("NETGEAR84").equals(id)) {
+                    builder.setContentTitle("Welcome To COE Block");
+                    flag=1;
+                }
+                if (new String("GCLAB").equals(id)) {
+                    builder.setContentTitle("ARE You in Class?");
+                    flag=1;
+                }
+
+                builder.setContentText("New Delhi");
                 builder.setSmallIcon(R.drawable.ifo);
                 // builder.setContentIntent(pendingIntent);
                 builder.setOngoing(true);
-                builder.setSubText("This is subtext...");   
+                builder.setSubText("Build No 1.3");
                 builder.setNumber(100);
                 builder.build();
                 myNotication = builder.getNotification();
                 manager.notify(11, myNotication);
-                break;
             }
 
+
+
             txv[0].append("BSSID: " + scanresult.BSSID + "\n");
-            txv[0].append("RSSI: " + scanresult.level + "\n" + "Frequency: " + scanresult.frequency + "\n" + "Capability: " + scanresult.capabilities + "\n" + scanresult.SSID + "\n" + scanresult.timestamp / 60000000 + "\n" + "Approx Distance Of Access Point: " + df.format(dis) + " m." + "\n\n");
+            txv[0].append("RSSI: " + scanresult.level + "\n" + "Frequency: " + scanresult.frequency + "\n" + "Capability: " + scanresult.capabilities + "\n" + scanresult.SSID + "\n" + scanresult.timestamp / 60000000 + "\n" + "Approx Distance Of Access Point: " + df.format(dis) + " m." + st + "\n\n");
 
 
         }
