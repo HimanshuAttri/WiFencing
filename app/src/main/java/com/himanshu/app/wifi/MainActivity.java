@@ -33,10 +33,10 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     String st;
-    int flag=0;
+    int flag = 0;
     NotificationManager manager;
     Notification myNotication;
-    private static final int NOTIFY_ME_ID=1337;
+    private static final int NOTIFY_ME_ID = 1337;
     TextView[] txv = new TextView[10];
     //TextView thead =(TextView)findViewById(R.id.tv_heading);
 
@@ -59,19 +59,16 @@ public class MainActivity extends AppCompatActivity {
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-
-
-
-                    RunScan();
-
-
-
-
-
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RunScan();
 
             }
+        });
 
 
+    }
 
 
     public void RunScan() {
@@ -93,44 +90,57 @@ public class MainActivity extends AppCompatActivity {
             txv[0].setMovementMethod(new ScrollingMovementMethod());
             double dis = (Math.pow(10.0, exp) * 100.0) / 100.0;
             DecimalFormat df = new DecimalFormat("###.##");
-            String id=scanresult.SSID.toString();
+            String id = scanresult.SSID.toString();
+            String id2 = scanresult.BSSID.toString();
 
-                manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-                Notification.Builder builder = new Notification.Builder(MainActivity.this);
-                builder.setAutoCancel(false);
-                builder.setTicker("this is ticker text");
+            manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            Notification.Builder builder = new Notification.Builder(MainActivity.this);
+            builder.setAutoCancel(false);
+            builder.setTicker("this is ticker text");
 
-            if(flag==0)
-            {
+            if (flag == 0) {
+                if (new String("Astitwa Saxena").equals(id)) {
+                    builder.setContentTitle("Red Coder Found");
+                    flag = 1;
+                }
+                if (new String("BGKn-ZGVIcGFuc2h1").equals(id)) {
+                    builder.setContentTitle("Ghissu Found");
+                    flag = 1;
+                }
+                if (new String("AKM_DEVELOPER").equals(id)) {
+                    builder.setContentTitle("Hramkhor Found");
+                    flag = 1;
+                }
 
-            if(new String("NirmankartaWiFi").equals(id)) {
-                builder.setContentTitle("Welcome Home");
-                flag=1;
-            }
+                if (new String("30:b5:c2:cf:7f:b0").equals(id2)) {
+                    builder.setContentTitle("Welcome Home");
+                    flag = 1;
+                }
 
                 if (new String("proxy01").equals(id)) {
                     builder.setContentTitle("Welcome To NSIT");
-                    flag=1;
+                    flag = 1;
                 }
                 if (new String("kunjbihari").equals(id)) {
                     builder.setContentTitle("Welcome To Sangam Vihar");
-                    flag=1;
+                    flag = 1;
                 }
-                if (new String("kunjbihari").equals(id)) {
-                    builder.setContentTitle("Welcome To Sangam Vihar");
-                    flag=1;
-                }
+
                 if (new String("NETGEAR84").equals(id)) {
                     builder.setContentTitle("Welcome To COE Block");
-                    flag=1;
+                    flag = 1;
                 }
                 if (new String("GCLAB").equals(id)) {
                     builder.setContentTitle("ARE You in Class?");
-                    flag=1;
+                    flag = 1;
+                }
+                if (new String("14:cc:20:44:54:58").equals(id2)) {
+                    builder.setContentTitle("Welcome to Class");
+                    flag = 1;
                 }
 
                 builder.setContentText("New Delhi");
-                builder.setSmallIcon(R.drawable.ifo);
+                builder.setSmallIcon(R.drawable.ic_info_black_48dp);
                 // builder.setContentIntent(pendingIntent);
                 builder.setOngoing(true);
                 builder.setSubText("Build No 1.3");
@@ -138,15 +148,15 @@ public class MainActivity extends AppCompatActivity {
                 builder.build();
                 myNotication = builder.getNotification();
                 manager.notify(11, myNotication);
+                myNotication.flags = Notification.FLAG_AUTO_CANCEL;
+
+
+                txv[0].append("BSSID: " + scanresult.BSSID + "\n");
+                txv[0].append("RSSI: " + scanresult.level + "\n" + "Frequency: " + scanresult.frequency + "\n" + "Capability: " + scanresult.capabilities + "\n" + scanresult.SSID + "\n" + scanresult.timestamp / 60000000 + "\n" + "Approx Distance Of Access Point: " + df.format(dis) + " m." + st + "\n\n");
+
+
             }
-
-
-
-            txv[0].append("BSSID: " + scanresult.BSSID + "\n");
-            txv[0].append("RSSI: " + scanresult.level + "\n" + "Frequency: " + scanresult.frequency + "\n" + "Capability: " + scanresult.capabilities + "\n" + scanresult.SSID + "\n" + scanresult.timestamp / 60000000 + "\n" + "Approx Distance Of Access Point: " + df.format(dis) + " m." + st + "\n\n");
-
-
         }
-    }
 
+    }
 }
