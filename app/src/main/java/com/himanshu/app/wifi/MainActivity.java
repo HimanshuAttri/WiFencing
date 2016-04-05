@@ -94,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
             String id2 = scanresult.BSSID.toString();
 
             manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+
             Notification.Builder builder = new Notification.Builder(MainActivity.this);
             builder.setAutoCancel(false);
             builder.setTicker("this is ticker text");
@@ -101,42 +103,42 @@ public class MainActivity extends AppCompatActivity {
             if (flag == 0) {
                 if (new String("Astitwa Saxena").equals(id)) {
                     builder.setContentTitle("Red Coder Found");
-                    flag = 1;
+                    flag=1;
                 }
                 if (new String("BGKn-ZGVIcGFuc2h1").equals(id)) {
                     builder.setContentTitle("Ghissu Found");
-                    flag = 1;
+                    flag=1;
                 }
                 if (new String("AKM_DEVELOPER").equals(id)) {
                     builder.setContentTitle("Hramkhor Found");
-                    flag = 1;
+                    flag=1;
                 }
 
                 if (new String("30:b5:c2:cf:7f:b0").equals(id2)) {
                     builder.setContentTitle("Welcome Home");
-                    flag = 1;
+                    flag=1;
                 }
 
                 if (new String("proxy01").equals(id)) {
                     builder.setContentTitle("Welcome To NSIT");
-                    flag = 1;
+                    flag=1;
                 }
                 if (new String("kunjbihari").equals(id)) {
                     builder.setContentTitle("Welcome To Sangam Vihar");
-                    flag = 1;
+                    flag=1;
                 }
 
                 if (new String("NETGEAR84").equals(id)) {
                     builder.setContentTitle("Welcome To COE Block");
-                    flag = 1;
+                    flag=1;
                 }
                 if (new String("GCLAB").equals(id)) {
                     builder.setContentTitle("ARE You in Class?");
-                    flag = 1;
+                    flag=1;
                 }
                 if (new String("14:cc:20:44:54:58").equals(id2)) {
                     builder.setContentTitle("Welcome to Class");
-                    flag = 1;
+                    flag=1;
                 }
 
                 builder.setContentText("New Delhi");
@@ -147,15 +149,18 @@ public class MainActivity extends AppCompatActivity {
                 builder.setNumber(100);
                 builder.build();
                 myNotication = builder.getNotification();
-                manager.notify(11, myNotication);
                 myNotication.flags = Notification.FLAG_AUTO_CANCEL;
+                manager.notify(11, myNotication);
+            }
+
+
 
 
                 txv[0].append("BSSID: " + scanresult.BSSID + "\n");
                 txv[0].append("RSSI: " + scanresult.level + "\n" + "Frequency: " + scanresult.frequency + "\n" + "Capability: " + scanresult.capabilities + "\n" + scanresult.SSID + "\n" + scanresult.timestamp / 60000000 + "\n" + "Approx Distance Of Access Point: " + df.format(dis) + " m." + st + "\n\n");
 
 
-            }
+
         }
 
     }
