@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setSmallIcon(R.drawable.ifo);
                 // builder.setContentIntent(pendingIntent);
                 builder.setOngoing(true);
-                builder.setSubText("This is subtext...");   //API level 16
+                builder.setSubText("This is subtext...");   
                 builder.setNumber(100);
                 builder.build();
                 myNotication = builder.getNotification();
