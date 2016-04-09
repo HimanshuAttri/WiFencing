@@ -4,9 +4,12 @@ import android.app.ListActivity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
+import android.net.Uri;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -21,6 +24,8 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,40 +34,61 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 
-public class MainActivity extends AppCompatActivity {
+
+
+public class MainActivity extends ListActivity {
+    int flag=0;
+
+
+
+
+
+   //ListView listView = (ListView) findViewById(R.id.list);
+    Random random = new Random();
+    String sold="";
+
     String st;
-    int flag = 0;
+
+
     NotificationManager manager;
     Notification myNotication;
-    private static final int NOTIFY_ME_ID = 1337;
+
     TextView[] txv = new TextView[10];
-    //TextView thead =(TextView)findViewById(R.id.tv_heading);
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        //
+        String[] BSSID=new String[]{""};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, BSSID);
 
 
-        txv[0] = (TextView) findViewById(R.id.tv1);
-       /* txv[1]=(TextView) findViewById(R.id.tv2);
-        txv[2]=(TextView) findViewById(R.id.tv3);
-        txv[3]=(TextView) findViewById(R.id.tv4);*/
-        // txv5=(TextView) findViewById(R.id.tv5);
-        //thead.setText("List Of WiFi Available !");
+        // Assign adapter to List
+        setListAdapter(adapter);
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+
+
+    //    txv[0] = (TextView) findViewById(R.id.tv1);
+       Button fab = (Button) findViewById(R.id.bt);
+
+
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 RunScan();
+
 
             }
         });
@@ -71,15 +97,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void RunScan() {
+    private int RunScan() {
+
         WifiManager wManager;
         List<ScanResult> wifiList;
+        String[] BSSID=new String[]{"killall"};
+        // initiate the listadapter
+        ArrayList<String> list = new ArrayList<String>();
+
+        ArrayAdapter<String> myAdapter = new ArrayAdapter <String>(this,
+
+               android. R.layout.simple_list_item_1, list);
+
+
+
+
+
 
 
         wManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 
         wifiList = wManager.getScanResults();
-        txv[0].setText("");
+
         new IntentFilter(wManager.SCAN_RESULTS_AVAILABLE_ACTION);
         wManager.startScan();
         for (int i = 0; i < wifiList.size(); i++) {
@@ -87,81 +126,25 @@ public class MainActivity extends AppCompatActivity {
             double exp = (27.55 - (20 * Math.log10(scanresult.frequency)) + Math.abs(scanresult.level)) / 20.0;
 
             Math.pow(10.0, exp);
-            txv[0].setMovementMethod(new ScrollingMovementMethod());
+//            txv[0].setMovementMethod(new ScrollingMovementMethod());
             double dis = (Math.pow(10.0, exp) * 100.0) / 100.0;
             DecimalFormat df = new DecimalFormat("###.##");
             String id = scanresult.SSID.toString();
             String id2 = scanresult.BSSID.toString();
 
-            manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            list.add(id+"\n"+id2+"\n"+"Estimated Distance: "+df.format(dis)+"m.");
 
+            // assign the list adapter
 
-            Notification.Builder builder = new Notification.Builder(MainActivity.this);
-            builder.setAutoCancel(false);
-            builder.setTicker("this is ticker text");
-
-            if (flag == 0) {
-                if (new String("Astitwa Saxena").equals(id)) {
-                    builder.setContentTitle("Red Coder Found");
-                    flag=1;
-                }
-                if (new String("BGKn-ZGVIcGFuc2h1").equals(id)) {
-                    builder.setContentTitle("Ghissu Found");
-                    flag=1;
-                }
-                if (new String("AKM_DEVELOPER").equals(id)) {
-                    builder.setContentTitle("Hramkhor Found");
-                    flag=1;
-                }
-
-                if (new String("30:b5:c2:cf:7f:b0").equals(id2)) {
-                    builder.setContentTitle("Welcome Home");
-                    flag=1;
-                }
-
-                if (new String("proxy01").equals(id)) {
-                    builder.setContentTitle("Welcome To NSIT");
-                    flag=1;
-                }
-                if (new String("kunjbihari").equals(id)) {
-                    builder.setContentTitle("Welcome To Sangam Vihar");
-                    flag=1;
-                }
-
-                if (new String("NETGEAR84").equals(id)) {
-                    builder.setContentTitle("Welcome To COE Block");
-                    flag=1;
-                }
-                if (new String("GCLAB").equals(id)) {
-                    builder.setContentTitle("ARE You in Class?");
-                    flag=1;
-                }
-                if (new String("14:cc:20:44:54:58").equals(id2)) {
-                    builder.setContentTitle("Welcome to Class");
-                    flag=1;
-                }
-
-                builder.setContentText("New Delhi");
-                builder.setSmallIcon(R.drawable.ic_info_black_48dp);
-                // builder.setContentIntent(pendingIntent);
-                builder.setOngoing(true);
-                builder.setSubText("Build No 1.3");
-                builder.setNumber(100);
-                builder.build();
-                myNotication = builder.getNotification();
-                myNotication.flags = Notification.FLAG_AUTO_CANCEL;
-                manager.notify(11, myNotication);//
-            }
-
-
-
-
-                txv[0].append("BSSID: " + scanresult.BSSID + "\n");
-                txv[0].append("RSSI: " + scanresult.level + "\n" + "Frequency: " + scanresult.frequency + "\n" + "Capability: " + scanresult.capabilities + "\n" + scanresult.SSID + "\n" + scanresult.timestamp / 60000000 + "\n" + "Approx Distance Of Access Point: " + df.format(dis) + " m." + st + "\n\n");
-
+            setListAdapter(myAdapter);
 
 
         }
+        ;
 
+
+
+        return  0;
     }
+
 }
