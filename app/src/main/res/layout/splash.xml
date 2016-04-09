@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/md_deep_orange_A400" >
+
+
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="380px"
+        android:layout_height="300px"
+        android:layout_centerInParent="true"
+        android:src="@drawable/logo"
+        />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:textSize="25dp"
+        android:textColor="#fff9c4"
+        android:gravity="center_horizontal"
+
+        android:text="Vigenere Cipher"
+        android:id="@+id/sptv"
+        android:layout_marginTop="400dp" />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:textSize="15dp"
+        android:textColor="#0db1f7"
+        android:gravity="center_horizontal"
+
+        android:text="By:Himanshu Attri"
+        android:id="@+id/dev"
+        android:layout_below="@id/sptv"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="100dp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

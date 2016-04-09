@@ -17,7 +17,7 @@
         android:padding="5dp"
         android:textColor="@color/md_blue_100"
         android:background="@color/md_orange_600"
-        android:text="Available WiFi"
+        android:text="WiFi Distance Calculator"
         android:textAlignment="gravity"/>
 
     <ListView
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/mainText"
         android:id="@android:id/empty"
-        android:text="There is no data"
+        android:text="No WiFi Found !!"
         android:textStyle="bold" />
     <ImageView
         android:layout_width="wrap_content"
