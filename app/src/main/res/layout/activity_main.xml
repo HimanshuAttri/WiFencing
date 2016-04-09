@@ -6,20 +6,26 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity"
+    android:background="@drawable/bg">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
         android:id="@+id/mainText"
-        android:text="My list" />
+        android:textSize="20dp"
+        android:padding="5dp"
+        android:textColor="@color/md_blue_100"
+        android:background="@color/md_orange_600"
+        android:text="Available WiFi"
+        android:textAlignment="gravity"/>
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/mainText"
         android:id="@android:id/list"
-        android:background="#aaaaaa" />
+        android:background="#66abf91b" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -28,11 +34,22 @@
         android:id="@android:id/empty"
         android:text="There is no data"
         android:textStyle="bold" />
-    <Button
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Search"
+        android:text="Refresh"
         android:id="@+id/bt"
-        android:layout_marginTop="400dp"/>
+        android:layout_marginTop="500dp"
+        android:layout_marginLeft="245dp"
+        android:src="@drawable/refresh"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="About"
+        android:id="@+id/about"
+
+        android:layout_marginLeft="275dp"
+        android:src="@drawable/about"/>
 
 </RelativeLayout>

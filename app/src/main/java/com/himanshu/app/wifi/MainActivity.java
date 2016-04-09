@@ -26,6 +26,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -80,10 +81,30 @@ public class MainActivity extends ListActivity {
 
 
     //    txv[0] = (TextView) findViewById(R.id.tv1);
-       Button fab = (Button) findViewById(R.id.bt);
+       ImageView fab = (ImageView) findViewById(R.id.bt);
+        ImageView about = (ImageView) findViewById(R.id.about);
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "This App is developed by Himanshu Attri         Under Graduate at NSIT COE branch.                    Contact : attri.him@gmail.com",
+                        Toast.LENGTH_LONG).show();
+
+               // about.startAnimation(myAnimation);
 
 
 
+
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.himanshuattri.com"));
+                startActivity(browserIntent);
+
+
+            }
+        });
+
+
+
+
+        RunScan();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,7 +128,7 @@ public class MainActivity extends ListActivity {
 
         ArrayAdapter<String> myAdapter = new ArrayAdapter <String>(this,
 
-               android. R.layout.simple_list_item_1, list);
+               android.R.layout.simple_list_item_1, list);
 
 
 
@@ -132,15 +153,17 @@ public class MainActivity extends ListActivity {
             String id = scanresult.SSID.toString();
             String id2 = scanresult.BSSID.toString();
 
-            list.add(id+"\n"+id2+"\n"+"Estimated Distance: "+df.format(dis)+"m.");
+            list.add(id + "\n" + id2 + "\n" + "Estimated Distance: " + df.format(dis) + "m.");
 
             // assign the list adapter
 
-            setListAdapter(myAdapter);
+
 
 
         }
-        ;
+
+        setListAdapter(myAdapter);
+
 
 
 
