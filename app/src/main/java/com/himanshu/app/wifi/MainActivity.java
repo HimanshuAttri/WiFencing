@@ -45,6 +45,7 @@ import java.util.Random;
 
 public class MainActivity extends ListActivity {
     int flag=0;
+   ImageView fab;
 
 
 
@@ -81,7 +82,7 @@ public class MainActivity extends ListActivity {
 
 
     //    txv[0] = (TextView) findViewById(R.id.tv1);
-       ImageView fab = (ImageView) findViewById(R.id.bt);
+       fab = (ImageView) findViewById(R.id.bt);
         ImageView about = (ImageView) findViewById(R.id.about);
         about.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +109,7 @@ public class MainActivity extends ListActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                fab.setRotation(fab.getRotation() + 90);
                 RunScan();
 
 
