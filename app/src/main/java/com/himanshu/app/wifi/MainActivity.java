@@ -155,7 +155,7 @@ public class MainActivity extends ListActivity {
             String id = scanresult.SSID.toString();
             String id2 = scanresult.BSSID.toString();
 
-            list.add(id + "\n" + id2 + "\n" + "Estimated Distance: " + df.format(dis) + "m.");
+            list.add("SSID: "+id + "\n" +"Mac: "+ id2 + "\n" + "Estimated Distance: " + df.format(dis) + "m.\n"+"Capabilities: "+scanresult.capabilities+"\nStrength: "+scanresult.level+"db"+"\nFrequency : "+scanresult.frequency+".mhz"+"\n");
 
             // assign the list adapter
 
