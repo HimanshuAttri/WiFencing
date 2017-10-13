@@ -1,4 +1,4 @@
-# Wifi_Distance_
+# Wifi_Distance_Calculator
 Android app to calculate distance from your Wifi Hotspot using formula 
 and it also gives details of wifi 
 RSSID /MAC /BSSID etc.
